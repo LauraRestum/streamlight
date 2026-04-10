@@ -442,6 +442,61 @@
       grid-column: span 2;
     }
 
+    /* ── IMPACT LINE (Slide 6) ── */
+    .impact-line {
+      margin-top: 0.75rem;
+      padding: 0.7rem 0.95rem;
+      background: rgba(120,190,33,0.06);
+      border-left: 2px solid var(--green);
+      border-radius: 2px;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.92);
+      font-weight: 500;
+      max-width: 720px;
+    }
+    .impact-line span {
+      color: var(--green);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── VALUE TEASE STRIP (Slide 8) ── */
+    .value-tease {
+      margin-top: 1rem;
+      padding: 0.95rem 1.1rem 1.05rem;
+      background: rgba(0,24,82,0.28);
+      border: 1px solid var(--border-dark);
+      border-left: 2px solid var(--green);
+      border-radius: 2px;
+    }
+    .tease-label {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 0.7rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .tease-label::before {
+      content: ''; display: block;
+      width: 12px; height: 1px; background: var(--green);
+    }
+    .tease-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+    .tease-tag {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 0.35rem;
+    }
+    .tease-item p {
+      font-size: 0.72rem; line-height: 1.5;
+      color: rgba(255,255,255,0.72);
+      font-weight: 500;
+    }
+
     /* ── CLOSING SLIDE ── */
     .close-block {
       margin-top: 1rem;
@@ -589,6 +644,7 @@
       .compliance-row { grid-template-columns: 1fr; }
       .partnership-grid { grid-template-columns: 1fr; }
       .partner-card.highlight { grid-column: span 1; }
+      .tease-grid { grid-template-columns: 1fr; gap: 0.85rem; }
       .nav-dots { display: none; }
       .key-hint { display: none; }
       .contact-cards { flex-direction: column; align-items: center; }
@@ -714,7 +770,7 @@
         <div class="bento-img wide">
           <div class="bento-img-overlay">
             <h3>Production-Grade Textile Operations</h3>
-            <p>From single-SKU pilots to sustained high-volume production runs</p>
+            <p>Low-volume initial runs through sustained high-volume production</p>
           </div>
         </div>
         <!-- END IMAGE SLOT -->
@@ -832,6 +888,7 @@
       <div class="eyebrow">Quality &amp; Compliance</div>
       <h2>TAA-Compliant. Made in USA.<br><em>Documented and Traceable.</em></h2>
       <p class="subtitle wide">U.S.-based production facilities, domestic materials sourcing, and ISO-certified quality management. Every product documented and traceable from material receipt through shipment.</p>
+      <p class="impact-line"><span>Directly addresses</span> the domestic sourcing pressure currently on Streamlight's accessory supply chain — a TAA-compliant U.S. source, ready now.</p>
 
       <div class="compliance-row">
         <div class="compliance-badge">
@@ -938,6 +995,24 @@
           <div class="card-tag">Long-Term Vision</div>
           <h3>Broader Domestic Accessory Platform</h3>
           <p>Streamlight's accessory ecosystem extends well beyond these three categories: helmet mounts, rail mounts, replacement parts, and related kits across multiple product families. Envision absorbs additional product lines without retooling. One domestic source that scales with your portfolio.</p>
+        </div>
+      </div>
+
+      <div class="value-tease">
+        <div class="tease-label">Additional Value on the Table</div>
+        <div class="tease-grid">
+          <div class="tease-item">
+            <div class="tease-tag">Texas State Use Program</div>
+            <p>Dallas operations provide a pathway into the Texas State Use procurement program for qualifying accessory lines.</p>
+          </div>
+          <div class="tease-item">
+            <div class="tease-tag">Mandatory Procurement</div>
+            <p>Longer-term opportunity for a joint position on a mandatory procurement item — a durable, high-visibility program anchor.</p>
+          </div>
+          <div class="tease-item">
+            <div class="tease-tag">Kitting Opportunities</div>
+            <p>Sewn goods combined with lights, hardware, and packaging into shelf-ready kits — consolidated under one domestic supplier.</p>
+          </div>
         </div>
       </div>
     </div>
