@@ -452,23 +452,56 @@
       border-left: 2px solid var(--green);
       grid-column: span 2;
     }
-    .partner-card.unlock-box {
-      position: relative;
-      background: linear-gradient(140deg, #001852 0%, #002878 100%);
-      border: 1px solid rgba(120,190,33,0.45);
+
+    /* ── IMPACT LINE (Slide 6) ── */
+    .impact-line {
+      margin-top: 0.75rem;
+      padding: 0.7rem 0.95rem;
+      background: rgba(120,190,33,0.06);
       border-left: 2px solid var(--green);
-      grid-column: span 2;
-      box-shadow:
-        0 0 0 1px rgba(120,190,33,0.08),
-        0 0 28px rgba(120,190,33,0.18),
-        inset 0 0 24px rgba(120,190,33,0.04);
+      border-radius: 2px;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.92);
+      font-weight: 500;
+      max-width: 720px;
     }
-    .partner-card.unlock-box h3 { letter-spacing: -0.005em; }
-    .unlock-word {
+    .impact-line span {
       color: var(--green);
-      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── VALUE TEASE STRIP (Slide 8) ── */
+    .value-tease {
+      margin-top: 1rem;
+      padding: 0.95rem 1.1rem 1.05rem;
+      background: rgba(0,24,82,0.28);
+      border: 1px solid var(--border-dark);
+      border-left: 2px solid var(--green);
+      border-radius: 2px;
+    }
+    .tease-header {
+      font-size: 0.95rem;
       font-weight: 800;
-      text-shadow: 0 0 14px rgba(120,190,33,0.55);
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .tease-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .tease-item h4 {
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--text-light); margin-bottom: 0.3rem;
+      line-height: 1.3; letter-spacing: -0.01em;
+    }
+    .tease-item p {
+      font-size: 0.74rem; line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+      font-weight: 500;
     }
 
     /* ── CLOSING SLIDE ── */
@@ -548,48 +581,6 @@
     .slide.active .partnership-grid,
     .slide.active .two-col,
     .slide.active .close-block { animation: fadeUp 0.6s 0.4s ease both; }
-
-    /* ── UNLOCK REVEAL ── */
-    @keyframes unlockReveal {
-      0% {
-        opacity: 0;
-        transform: translateY(24px) scale(0.985);
-        border-color: rgba(120,190,33,0);
-        box-shadow:
-          0 0 0 1px rgba(120,190,33,0),
-          0 0 0 rgba(120,190,33,0),
-          inset 0 0 0 rgba(120,190,33,0);
-      }
-      55% {
-        opacity: 1;
-        transform: translateY(0) scale(1.005);
-        border-color: rgba(120,190,33,0.9);
-        box-shadow:
-          0 0 0 1px rgba(120,190,33,0.35),
-          0 0 70px rgba(120,190,33,0.55),
-          inset 0 0 40px rgba(120,190,33,0.1);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        border-color: rgba(120,190,33,0.45);
-        box-shadow:
-          0 0 0 1px rgba(120,190,33,0.08),
-          0 0 28px rgba(120,190,33,0.18),
-          inset 0 0 24px rgba(120,190,33,0.04);
-      }
-    }
-    @keyframes unlockWordGlow {
-      0%   { opacity: 0; text-shadow: 0 0 0 rgba(120,190,33,0); }
-      55%  { opacity: 1; text-shadow: 0 0 22px rgba(120,190,33,0.9); }
-      100% { opacity: 1; text-shadow: 0 0 14px rgba(120,190,33,0.55); }
-    }
-    .slide.active .partner-card.unlock-box {
-      animation: unlockReveal 1.1s 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-    }
-    .slide.active .partner-card.unlock-box .unlock-word {
-      animation: unlockWordGlow 1.1s 0.85s ease both;
-    }
 
     /* ── CLOSING SLIDE HALLWAY ZOOM ── */
     @keyframes hallwayZoom {
@@ -675,6 +666,7 @@
       .compliance-row { grid-template-columns: 1fr; }
       .partnership-grid { grid-template-columns: 1fr; }
       .partner-card.highlight { grid-column: span 1; }
+      .tease-grid { grid-template-columns: 1fr; gap: 0.85rem; }
       .nav-dots { display: none; }
       .key-hint { display: none; }
       .contact-cards { flex-direction: column; align-items: center; }
@@ -773,8 +765,8 @@
           <div class="stat-l">Amendment Compliant</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-n">50<span>+</span></div>
-          <div class="stat-l">Years Operating</div>
+          <div class="stat-n">90<span>+</span></div>
+          <div class="stat-l">Years Operating<br><span style="font-size:0.85em;opacity:0.75;">Since the 1930s</span></div>
         </div>
         <div class="stat-cell">
           <div class="stat-n">TAA</div>
@@ -831,7 +823,7 @@
           <img src="/images/production-press.jpg" alt="Production press operations">
           <div class="bento-img-overlay">
             <h3>Production-Grade Textile Operations</h3>
-            <p>From single-SKU pilots to sustained high-volume production runs</p>
+            <p>Low-volume initial runs through sustained high-volume production</p>
           </div>
         </div>
         <!-- END IMAGE SLOT -->
@@ -949,6 +941,7 @@
       <div class="eyebrow">Quality &amp; Compliance</div>
       <h2>TAA-Compliant. Made in USA.<br><em>Documented and Traceable.</em></h2>
       <p class="subtitle wide">U.S.-based production facilities, domestic materials sourcing, and ISO-certified quality management. Every product documented and traceable from material receipt through shipment.</p>
+      <p class="impact-line"><span>Directly addresses</span> the domestic sourcing pressure currently on Streamlight's accessory supply chain — a TAA-compliant U.S. source, ready now.</p>
 
       <div class="compliance-row">
         <div class="compliance-badge">
@@ -1039,23 +1032,41 @@
     <div class="slide-content">
       <div class="eyebrow">Partnership Model</div>
       <h2>A Domestic Accessory Partner.<br><em>Not a One-Off Supplier.</em></h2>
-      <p class="subtitle wide">A long-term domestic manufacturing partner for Streamlight's full accessory ecosystem. Start with a pilot, expand as the program proves out.</p>
+      <p class="subtitle wide">A formal teaming agreement — Envision as Streamlight's long-term domestic manufacturing partner.</p>
 
       <div class="partnership-grid">
         <div class="partner-card">
-          <div class="card-tag">Phase 1</div>
-          <h3>Pilot Program</h3>
-          <p>Start with the highest-readiness accessory category. Receive samples, complete engineering review, build prototypes, lock cost basis, and deliver production-quality units for evaluation.</p>
+          <div class="card-tag">Framework</div>
+          <h3>Teaming Agreement</h3>
+          <p>A defined commercial framework with pricing, IP protections, capacity commitments, and governance locked from day one.</p>
         </div>
         <div class="partner-card">
-          <div class="card-tag">Phase 2</div>
+          <div class="card-tag">Execution</div>
           <h3>Production &amp; Expansion</h3>
-          <p>Move approved pilot into sustained production. Add accessory categories using the same manufacturing architecture and established quality systems.</p>
+          <p>Launch with the highest-readiness category, move directly into sustained production, then add categories onto the same architecture.</p>
         </div>
-        <div class="partner-card unlock-box">
+        <div class="partner-card highlight">
           <div class="card-tag">Long-Term Vision</div>
-          <h3>What Does This Partnership <span class="unlock-word">Unlock</span>?</h3>
-          <p>Streamlight's accessory ecosystem extends well beyond these three categories: helmet mounts, rail mounts, replacement parts, and related kits across multiple product families. Envision absorbs additional product lines without retooling. One domestic source that scales with your portfolio.</p>
+          <h3>Broader Domestic Accessory Platform</h3>
+          <p>Streamlight's ecosystem extends well beyond these three categories — helmet mounts, rail mounts, replacement parts, and kits across product families. One domestic source that scales with your portfolio, no retooling required.</p>
+        </div>
+      </div>
+
+      <div class="value-tease">
+        <h3 class="tease-header">What This Partnership Unlocks</h3>
+        <div class="tease-grid">
+          <div class="tease-item">
+            <h4>Texas State Use Program</h4>
+            <p>Dallas opens a pathway into Texas State Use procurement for qualifying lines.</p>
+          </div>
+          <div class="tease-item">
+            <h4>Mandatory Procurement Item</h4>
+            <p>Longer-term opportunity for a joint position on a mandatory procurement item.</p>
+          </div>
+          <div class="tease-item">
+            <h4>Shelf-Ready Kitting</h4>
+            <p>Lights, sewn goods, hardware, and packaging consolidated into shelf-ready kits.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1079,19 +1090,16 @@
           <div class="contact-role">Envision Contact</div>
           <div class="contact-name">Kathy Vines</div>
           <div class="contact-title">Vice President ‑ Strategic Partnerships &amp; Customer Care</div>
-          <div class="contact-info">kathy.vines@envisionus.com</div>
         </div>
         <div class="contact-card">
           <div class="contact-role">Envision Contact</div>
           <div class="contact-name">Steven Amigh</div>
           <div class="contact-title">Product and Project Manager</div>
-          <div class="contact-info">steven.amigh@envisionus.com</div>
         </div>
         <div class="contact-card">
           <div class="contact-role">Envision Contact</div>
           <div class="contact-name">Patrick Tuttle</div>
           <div class="contact-title">Senior Vice President, Operations and New Product Development</div>
-          <div class="contact-info">patrick.tuttle@envisionus.com</div>
         </div>
       </div>
     </div>
