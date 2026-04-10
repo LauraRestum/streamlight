@@ -606,6 +606,50 @@
       .img-break-inline { margin: 1.5rem 0; width: 100%; }
       .img-break-inline blockquote { padding: 0; font-size: 1rem; }
     }
+
+    /* ── IMAGE PLACEHOLDERS (layout review) ── */
+    .img-placeholder {
+      display: flex; align-items: center; justify-content: center;
+      border: 2px dashed rgba(120,190,33,0.4);
+      background: rgba(120,190,33,0.04);
+      color: rgba(120,190,33,0.6);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-align: center;
+      min-height: 120px;
+      padding: 1rem;
+    }
+    .img-placeholder.full {
+      position: absolute; inset: 0;
+      min-height: unset;
+      border: none;
+      z-index: 0;
+    }
+
+    /* ── HERO CROSSFADE CONTAINER ── */
+    .hero-slideshow {
+      position: absolute; inset: 0;
+    }
+    .hero-slideshow .hero-bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+    }
+    .hero-slideshow .hero-bg-img:nth-child(1) {
+      animation: heroCrossfade 12s ease-in-out infinite;
+    }
+    .hero-slideshow .hero-bg-img:nth-child(2) {
+      animation: heroCrossfade 12s ease-in-out infinite -6s;
+    }
+    .hero-slideshow .hero-bg-img:nth-child(3) {
+      animation: heroCrossfade 18s ease-in-out infinite -12s;
+    }
+    @keyframes heroCrossfade {
+      0%, 28% { opacity: 1; }
+      33%, 95% { opacity: 0; }
+      100% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -631,7 +675,11 @@
   <!-- ───── SLIDE 1: HERO ───── -->
   <div class="slide active" data-slide="0">
     <div class="slide-bg" style="background: linear-gradient(135deg, #001852 0%, #003087 40%, #000d2e 100%);">
-      <!-- IMAGE SLOT: tactical lighting product photography — Streamlight flashlights in field use, military/law enforcement context, dark atmospheric -->
+      <div class="hero-slideshow">
+        <div class="img-placeholder full" style="opacity: 0.6;">BG Image A<br><small style="font-weight:500;letter-spacing:0;text-transform:none;font-size:0.55rem;">Crossfades with B &amp; C — 12s cycle</small></div>
+        <div class="img-placeholder full" style="opacity: 0; border: 2px dashed rgba(120,190,33,0.25);">BG Image B</div>
+        <div class="img-placeholder full" style="opacity: 0; border: 2px dashed rgba(120,190,33,0.15);">BG Image C</div>
+      </div>
     </div>
     <div class="slide-overlay"></div>
     <div class="slide-grain"></div>
@@ -686,6 +734,7 @@
         </div>
         <!-- IMAGE SLOT: Envision manufacturing floor photography — sewing operations, cut-and-sew, textile work, warehouse scale -->
         <div class="bento-img">
+          <div class="img-placeholder" style="height:100%;width:100%;position:absolute;inset:0;">Slide 2 — Image Slot A<br><small style="font-weight:500;letter-spacing:0;text-transform:none;font-size:0.55rem;">Manufacturing / warehouse photo</small></div>
           <div class="bento-img-overlay">
             <h3>U.S.-Based Production</h3>
             <p>Wichita, KS &amp; Dallas, TX</p>
@@ -723,6 +772,7 @@
         </div>
         <!-- IMAGE SLOT: close-up textile sewing operation, nylon webbing, industrial sewing machine — dark, high-contrast -->
         <div class="bento-img wide">
+          <div class="img-placeholder" style="height:100%;width:100%;position:absolute;inset:0;">Slide 3 — Image Slot B (wide)<br><small style="font-weight:500;letter-spacing:0;text-transform:none;font-size:0.55rem;">Close-up production / textile photo</small></div>
           <div class="bento-img-overlay">
             <h3>Production-Grade Textile Operations</h3>
             <p>From single-SKU pilots to sustained high-volume production runs</p>
@@ -830,6 +880,7 @@
         <div class="slide-bg" style="background: linear-gradient(135deg, #001852, #003087, #001030);"></div>
         <div class="slide-overlay" style="background: linear-gradient(90deg, rgba(0,13,46,0.97) 0%, rgba(0,24,82,0.7) 50%, rgba(0,13,46,0.4) 100%);"></div>
         <!-- IMAGE SLOT: tactical accessories flat lay — holsters, straps, MOLLE gear, dark background -->
+        <div class="img-placeholder" style="position:absolute;inset:0;min-height:unset;border:none;z-index:1;font-size:0.55rem;">Slide 5 — Banner Image<br><small style="font-weight:500;letter-spacing:0;text-transform:none;">Ambient / product photo behind quote</small></div>
         <blockquote>One manufacturing architecture. <span>Multiple product families.</span> Designed for platform reuse from day one.</blockquote>
       </div>
     </div>
@@ -910,6 +961,7 @@
         </div>
         <!-- IMAGE SLOT: warehouse fulfillment operations — pick and pack, shipping, logistics floor -->
         <div class="bento-img">
+          <div class="img-placeholder" style="height:100%;width:100%;position:absolute;inset:0;">Slide 7 — Image Slot C<br><small style="font-weight:500;letter-spacing:0;text-transform:none;font-size:0.55rem;">Warehouse / fulfillment photo</small></div>
           <div class="bento-img-overlay">
             <h3>Integrated Fulfillment</h3>
             <p>Same facility. Zero transfer delays.</p>
