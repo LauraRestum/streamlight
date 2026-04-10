@@ -497,14 +497,23 @@
       gap: 1.1rem;
     }
     .tease-tag {
-      font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(255,255,255,0.95);
-      margin-bottom: 0.35rem;
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .tease-tag::before {
+      content: ''; display: block;
+      width: 12px; height: 1px; background: var(--green);
+    }
+    .tease-item h4 {
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--text-light); margin-bottom: 0.3rem;
+      line-height: 1.3; letter-spacing: -0.01em;
     }
     .tease-item p {
-      font-size: 0.72rem; line-height: 1.5;
-      color: rgba(255,255,255,0.72);
+      font-size: 0.74rem; line-height: 1.55;
+      color: rgba(255,255,255,0.82);
       font-weight: 500;
     }
 
@@ -1036,23 +1045,23 @@
     <div class="slide-content">
       <div class="eyebrow">Partnership Model</div>
       <h2>A Domestic Accessory Partner.<br><em>Not a One-Off Supplier.</em></h2>
-      <p class="subtitle wide">A formal teaming agreement establishing Envision as Streamlight's long-term domestic manufacturing partner across the full accessory ecosystem.</p>
+      <p class="subtitle wide">A formal teaming agreement — Envision as Streamlight's long-term domestic manufacturing partner.</p>
 
       <div class="partnership-grid">
         <div class="partner-card">
           <div class="card-tag">Framework</div>
           <h3>Teaming Agreement</h3>
-          <p>A defined commercial framework that aligns both organizations around shared objectives, mutual commitments, and a clear path to sustained production. Establishes pricing structure, IP protections, capacity commitments, and governance from day one.</p>
+          <p>A defined commercial framework with pricing, IP protections, capacity commitments, and governance locked from day one.</p>
         </div>
         <div class="partner-card">
           <div class="card-tag">Execution</div>
           <h3>Production &amp; Expansion</h3>
-          <p>Launch with the highest-readiness accessory category and move directly into sustained production. Add additional categories using the same manufacturing architecture and established quality systems.</p>
+          <p>Launch with the highest-readiness category, move directly into sustained production, then add categories onto the same architecture.</p>
         </div>
         <div class="partner-card highlight">
           <div class="card-tag">Long-Term Vision</div>
           <h3>Broader Domestic Accessory Platform</h3>
-          <p>Streamlight's accessory ecosystem extends well beyond these three categories: helmet mounts, rail mounts, replacement parts, and related kits across multiple product families. Envision absorbs additional product lines without retooling. One domestic source that scales with your portfolio.</p>
+          <p>Streamlight's ecosystem extends well beyond these three categories — helmet mounts, rail mounts, replacement parts, and kits across product families. One domestic source that scales with your portfolio, no retooling required.</p>
         </div>
       </div>
 
@@ -1060,16 +1069,19 @@
         <div class="tease-label">Additional Value on the Table</div>
         <div class="tease-grid">
           <div class="tease-item">
-            <div class="tease-tag">Texas State Use Program</div>
-            <p>Dallas operations provide a pathway into the Texas State Use procurement program for qualifying accessory lines.</p>
+            <div class="tease-tag">Texas State Use</div>
+            <h4>Procurement Pathway</h4>
+            <p>Dallas opens a pathway into Texas State Use procurement for qualifying lines.</p>
           </div>
           <div class="tease-item">
             <div class="tease-tag">Mandatory Procurement</div>
-            <p>Longer-term opportunity for a joint position on a mandatory procurement item — a durable, high-visibility program anchor.</p>
+            <h4>Joint Program Position</h4>
+            <p>Longer-term opportunity for a joint position on a mandatory procurement item.</p>
           </div>
           <div class="tease-item">
-            <div class="tease-tag">Kitting Opportunities</div>
-            <p>Sewn goods combined with lights, hardware, and packaging into shelf-ready kits — consolidated under one domestic supplier.</p>
+            <div class="tease-tag">Kitting</div>
+            <h4>Shelf-Ready Assembly</h4>
+            <p>Lights, sewn goods, hardware, and packaging consolidated into shelf-ready kits.</p>
           </div>
         </div>
       </div>
