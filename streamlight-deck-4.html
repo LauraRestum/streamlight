@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envision × Streamlight — Domestic Manufacturing Partnership</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #003087;
+      --blue-dark: #001852;
+      --blue-mid: #004bb5;
+      --green: #78BE21;
+      --green-dim: rgba(120,190,33,0.15);
+      --text-light: #ffffff;
+      --text-muted: rgba(255,255,255,0.65);
+      --bg-body: #000d2e;
+      --surface-card: rgba(0,24,82,0.52);
+      --border-dark: rgba(255,255,255,0.08);
+      --border-blue: rgba(0,48,135,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      background: var(--bg-body);
+      color: var(--text-light);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3.5rem;
+      background: rgba(0,13,46,0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .logo {
+      font-weight: 800; font-size: 0.85rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #fff;
+    }
+    .logo span { color: var(--green); }
+    .nav-controls {
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .slide-counter {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .slide-counter .current { color: var(--green); font-weight: 700; }
+    .nav-dots {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: none; cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    .nav-dot.active {
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(120,190,33,0.5);
+    }
+    .nav-dot:hover:not(.active) {
+      background: rgba(255,255,255,0.35);
+    }
+    .nav-arrows {
+      display: flex; gap: 4px;
+    }
+    .nav-arrow {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .nav-arrow:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border-color: rgba(255,255,255,0.25);
+    }
+    .nav-arrow:disabled {
+      opacity: 0.25; cursor: default;
+    }
+
+    /* ── SLIDES CONTAINER ── */
+    .slides-wrapper {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+    .slide {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      padding-top: 58px;
+      overflow-y: auto;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ── SLIDE BACKGROUNDS ── */
+    .slide-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+    .slide-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,13,46,0.6) 0%, rgba(0,13,46,0.78) 45%, rgba(0,13,46,0.92) 100%);
+    }
+    .slide-grain {
+      position: absolute; inset: 0; opacity: 0.025; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── CONTENT CONTAINERS ── */
+    .slide-content {
+      position: relative; z-index: 2;
+      max-width: 1100px; width: 100%;
+      padding: 3rem 4rem;
+    }
+    .slide-content.centered {
+      text-align: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: calc(100vh - 58px);
+      padding: 4rem;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .eyebrow {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1.5rem;
+      display: inline-flex; align-items: center; gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: ''; display: block;
+      width: 22px; height: 1px; background: var(--green); opacity: 0.7;
+    }
+    h1 {
+      font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+    h1 em { font-style: normal; color: var(--green); }
+    h2 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    h2 em { font-style: normal; color: var(--green); }
+    h3 {
+      font-size: 1.2rem; font-weight: 700;
+      line-height: 1.3; letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .subtitle {
+      font-size: 1rem; color: var(--text-muted);
+      line-height: 1.75; max-width: 560px;
+    }
+    .subtitle.wide { max-width: 720px; }
+    .centered .subtitle { margin: 0 auto; }
+    p { line-height: 1.75; color: rgba(255,255,255,0.88); font-weight: 500; }
+
+    /* ── HERO SPECIFIC ── */
+    .hero-actions {
+      display: flex; gap: 1rem; margin-top: 2.5rem;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--green); color: #001852;
+      padding: 0.85rem 2rem; font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: none; border-radius: 2px; cursor: pointer;
+      transition: box-shadow 0.2s, opacity 0.2s;
+      display: inline-block; text-decoration: none;
+    }
+    .btn-primary:hover { opacity: 0.9; box-shadow: 0 0 28px rgba(120,190,33,0.4); }
+    .btn-ghost {
+      background: transparent; color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.85rem 2rem; font-weight: 600; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block; text-decoration: none; cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+    /* ── STATS BAND ── */
+    .stats-band {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.04);
+      margin: 2.5rem 0;
+      border: 1px solid var(--border-dark);
+    }
+    .stat-cell {
+      padding: 2rem 1.5rem;
+      background: rgba(0,13,46,0.6);
+      text-align: center;
+    }
+    .stat-n {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800; letter-spacing: -0.03em; color: #fff;
+    }
+    .stat-n span { color: var(--green); }
+    .stat-l {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-top: 0.5rem;
+    }
+
+    /* ── BENTO GRID ── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.04);
+      margin: 2rem 0;
+    }
+    .bento-card {
+      background: rgba(0,13,46,0.75);
+      padding: 2.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+    .bento-card:hover { background: rgba(0,16,48,0.9); }
+    .bento-card.wide { grid-column: span 2; }
+    .bento-card.featured {
+      background: linear-gradient(140deg, #001852 0%, #002878 100%);
+      border-left: 2px solid var(--green);
+    }
+    .card-tag {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card-tag::before {
+      content: ''; display: block;
+      width: 12px; height: 1px; background: var(--green);
+    }
+    .bento-card h3 {
+      font-size: 1rem; font-weight: 700;
+      color: var(--text-light); margin-bottom: 0.6rem;
+    }
+    .bento-card p {
+      font-size: 0.85rem; line-height: 1.7;
+      color: rgba(255,255,255,0.88); font-weight: 500;
+    }
+
+    /* ── IMAGE CARDS IN BENTO ── */
+    .bento-img {
+      position: relative; overflow: hidden;
+      min-height: 220px;
+      background: linear-gradient(135deg, #001852, #003087);
+    }
+    .bento-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.45; transition: opacity 0.5s, transform 0.7s; display: block;
+    }
+    .bento-img:hover img { opacity: 0.6; transform: scale(1.03); }
+    .bento-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,13,46,0.95) 0%, rgba(0,13,46,0.3) 55%, transparent 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1.75rem;
+    }
+    .bento-img-overlay h3 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .bento-img-overlay p { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+
+    /* ── TWO COLUMN LAYOUT ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+      margin: 2rem 0;
+    }
+    .two-col .col-text { }
+    .two-col .col-visual {
+      background: rgba(0,24,82,0.3);
+      border: 1px solid var(--border-dark);
+      padding: 2.25rem;
+      border-radius: 2px;
+    }
+
+    /* ── PROCESS FLOW ── */
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin: 2rem 0;
+      background: rgba(255,255,255,0.04);
+    }
+    .process-step {
+      background: rgba(0,13,46,0.75);
+      padding: 2rem 1.5rem;
+      position: relative;
+      text-align: center;
+    }
+    .step-num {
+      font-size: 2.6rem; font-weight: 800;
+      color: var(--green);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .process-step h3 {
+      font-size: 0.85rem; font-weight: 700;
+      margin-bottom: 0.6rem; text-align: center;
+    }
+    .process-step p {
+      font-size: 0.75rem; line-height: 1.65;
+      color: rgba(255,255,255,0.85); font-weight: 500;
+    }
+    .process-step::after {
+      content: '→';
+      position: absolute; right: -8px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(120,190,33,0.6);
+      font-size: 1.1rem; font-weight: 700;
+      z-index: 3;
+    }
+    .process-step:last-child::after { display: none; }
+
+    /* ── PRODUCT CATEGORY CARDS ── */
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.04);
+      margin: 2rem 0;
+    }
+    .product-card {
+      background: rgba(0,13,46,0.75);
+      padding: 2.5rem 2rem;
+      position: relative;
+      border-top: 2px solid transparent;
+      transition: all 0.3s;
+    }
+    .product-card:hover {
+      background: rgba(0,16,48,0.9);
+      border-top-color: var(--green);
+    }
+    .product-icon {
+      width: 44px; height: 44px;
+      background: rgba(120,190,33,0.08);
+      border: 1px solid rgba(120,190,33,0.15);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    .product-card h3 {
+      font-size: 1rem; margin-bottom: 0.6rem;
+    }
+    .product-card p {
+      font-size: 0.82rem; line-height: 1.7;
+      color: rgba(255,255,255,0.88); font-weight: 500;
+    }
+    .product-meta {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-dark);
+    }
+    .product-meta span {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green);
+    }
+
+    /* ── COMPLIANCE BADGES ── */
+    .compliance-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin: 2rem 0;
+      background: rgba(255,255,255,0.04);
+    }
+    .compliance-badge {
+      background: rgba(0,13,46,0.75);
+      padding: 2rem;
+      display: flex; align-items: center; gap: 1.25rem;
+      transition: background 0.2s;
+    }
+    .compliance-badge:hover { background: rgba(0,16,48,0.9); }
+    .badge-icon {
+      width: 48px; height: 48px; min-width: 48px;
+      background: rgba(120,190,33,0.06);
+      border: 1px solid rgba(120,190,33,0.12);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800;
+      color: var(--green); letter-spacing: 0.05em;
+    }
+    .badge-text h3 {
+      font-size: 0.85rem; margin-bottom: 0.3rem;
+    }
+    .badge-text p {
+      font-size: 0.75rem; color: rgba(255,255,255,0.85); line-height: 1.6; font-weight: 500;
+    }
+
+    /* ── PARTNERSHIP CARDS ── */
+    .partnership-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin: 2rem 0;
+      background: rgba(255,255,255,0.04);
+    }
+    .partner-card {
+      background: rgba(0,13,46,0.75);
+      padding: 1.75rem;
+      transition: background 0.2s;
+    }
+    .partner-card:hover { background: rgba(0,16,48,0.9); }
+    .partner-card.highlight {
+      background: linear-gradient(140deg, #001852 0%, #002878 100%);
+      border-left: 2px solid var(--green);
+      grid-column: span 2;
+    }
+
+    /* ── CLOSING SLIDE ── */
+    .close-block {
+      margin-top: 1.5rem;
+      padding: 2rem;
+      background: rgba(0,24,82,0.25);
+      border: 1px solid var(--border-dark);
+      border-radius: 2px;
+      max-width: 640px;
+    }
+    .close-block p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.75;
+      font-weight: 500;
+    }
+
+    /* ── IMAGE BREAK (between slides) ── */
+    .img-break-inline {
+      position: relative;
+      height: 140px;
+      overflow: hidden;
+      margin: 2rem 0;
+      width: 100%;
+      border: 1px solid var(--border-dark);
+    }
+    .img-break-inline .slide-bg {
+      background: linear-gradient(135deg, #001852 0%, #003087 50%, #001030 100%);
+    }
+    .img-break-inline .slide-overlay {
+      background: linear-gradient(90deg, rgba(0,13,46,0.97) 0%, rgba(0,24,82,0.7) 50%, rgba(0,13,46,0.4) 100%);
+    }
+    .img-break-inline blockquote {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 4rem;
+      height: 100%;
+      display: flex; align-items: center;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 700; line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+    .img-break-inline blockquote span { color: var(--green); }
+
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.58rem; letter-spacing: 0.18em;
+      text-transform: uppercase; font-weight: 600; z-index: 2;
+    }
+    .scroll-line {
+      width: 1px; height: 28px;
+      background: linear-gradient(to bottom, rgba(120,190,33,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* ── ENTRANCE ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide.active .eyebrow { animation: fadeUp 0.5s 0.15s ease both; }
+    .slide.active h1,
+    .slide.active h2 { animation: fadeUp 0.6s 0.25s ease both; }
+    .slide.active .subtitle { animation: fadeUp 0.6s 0.38s ease both; }
+    .slide.active .hero-actions { animation: fadeUp 0.6s 0.5s ease both; }
+    .slide.active .stats-band,
+    .slide.active .bento,
+    .slide.active .process-flow,
+    .slide.active .product-cards,
+    .slide.active .compliance-row,
+    .slide.active .partnership-grid,
+    .slide.active .two-col,
+    .slide.active .close-block { animation: fadeUp 0.6s 0.4s ease both; }
+
+    /* ── KEYBOARD HINT ── */
+    .key-hint {
+      position: fixed; bottom: 1.5rem; right: 3.5rem;
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.15); z-index: 50;
+    }
+    .key-hint kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      margin: 0 2px;
+    }
+
+    /* ── CLOSING SLIDE ── */
+    .logo-mark {
+      font-size: 2.4rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #fff;
+    }
+    .logo-mark span { color: var(--green); }
+    .contact-cards {
+      display: flex; gap: 2px; justify-content: center;
+      margin-top: 1rem;
+    }
+    .contact-card {
+      background: rgba(0,24,82,0.4);
+      border: 1px solid var(--border-dark);
+      padding: 2rem 3rem;
+      text-align: center;
+      min-width: 260px;
+    }
+    .contact-role {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1rem;
+    }
+    .contact-name {
+      font-size: 1.15rem; font-weight: 700;
+      color: #fff; margin-bottom: 0.3rem;
+    }
+    .contact-title {
+      font-size: 0.78rem; font-weight: 500;
+      color: rgba(255,255,255,0.6); margin-bottom: 0.75rem;
+    }
+    .contact-info {
+      font-size: 0.72rem; font-weight: 500;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .slide-content { padding: 2rem 1.5rem; }
+      .slide-content.centered { padding: 3rem 1.5rem; }
+      .bento { grid-template-columns: 1fr; }
+      .bento-card.wide { grid-column: span 1; }
+      .stats-band { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+      .process-flow { grid-template-columns: repeat(2, 1fr); }
+      .process-step::after { display: none; }
+      .product-cards { grid-template-columns: 1fr; }
+      .compliance-row { grid-template-columns: 1fr; }
+      .partnership-grid { grid-template-columns: 1fr; }
+      .partner-card.highlight { grid-column: span 1; }
+      .nav-dots { display: none; }
+      .key-hint { display: none; }
+      .contact-cards { flex-direction: column; align-items: center; }
+      .img-break-inline { margin: 1.5rem 0; width: 100%; }
+      .img-break-inline blockquote { padding: 0 1.5rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════ NAV ════════════════════════════════════════ -->
+<nav>
+  <div class="logo">ENVISION<span>.</span></div>
+  <div class="nav-controls">
+    <div class="nav-dots" id="navDots"></div>
+    <div class="slide-counter">
+      <span class="current" id="currentSlide">01</span> / <span id="totalSlides">09</span>
+    </div>
+    <div class="nav-arrows">
+      <button class="nav-arrow" id="prevBtn" onclick="changeSlide(-1)">←</button>
+      <button class="nav-arrow" id="nextBtn" onclick="changeSlide(1)">→</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════ SLIDES ════════════════════════════════════════ -->
+<div class="slides-wrapper">
+
+  <!-- ───── SLIDE 1: HERO ───── -->
+  <div class="slide active" data-slide="0">
+    <div class="slide-bg" style="background: linear-gradient(135deg, #001852 0%, #003087 40%, #000d2e 100%);">
+      <!-- IMAGE SLOT: tactical lighting product photography — Streamlight flashlights in field use, military/law enforcement context, dark atmospheric -->
+    </div>
+    <div class="slide-overlay"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content centered">
+      <div class="eyebrow">Domestic Manufacturing Partnership</div>
+      <h1>Built in America.<br>Built to <em>Your Standard.</em></h1>
+      <p class="subtitle">Domestic manufacturing for Streamlight's accessory portfolio. TAA-compliant, Berry-compliant, and built to scale from a single U.S. source.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="changeSlide(1)">Explore Capabilities</button>
+        <button class="btn-ghost" onclick="goToSlide(7)">Partnership Model</button>
+      </div>
+      <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        Navigate
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 2: WHO ENVISION IS ───── -->
+  <div class="slide" data-slide="1">
+    <div class="slide-bg" style="background: linear-gradient(160deg, #000d2e 0%, #001852 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content">
+      <div class="eyebrow">About Envision</div>
+      <h2>Enterprise Manufacturing.<br><em>Domestic Infrastructure.</em></h2>
+      <p class="subtitle wide">Large-scale manufacturing, assembly, and fulfillment across multiple U.S. facilities. Production-grade output for commercial, enterprise, and government customers with full compliance infrastructure.</p>
+
+      <div class="stats-band">
+        <div class="stat-cell">
+          <div class="stat-n">340<span>K+</span></div>
+          <div class="stat-l">Sq. Ft. Production Space</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-n">Berry</div>
+          <div class="stat-l">Amendment Compliant</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-n">50<span>+</span></div>
+          <div class="stat-l">Years Operating</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-n">TAA</div>
+          <div class="stat-l">Compliant Production</div>
+        </div>
+      </div>
+
+      <div class="bento">
+        <div class="bento-card featured wide">
+          <div class="card-tag">Core Advantage</div>
+          <h3>Vertically Integrated Domestic Operations</h3>
+          <p>Manufacturing, assembly, QC, packaging, and fulfillment under one roof. No third-party handoffs. No offshore dependencies. Full visibility from prototype through shipment.</p>
+        </div>
+        <!-- IMAGE SLOT: Envision manufacturing floor photography — sewing operations, cut-and-sew, textile work, warehouse scale -->
+        <div class="bento-img">
+          <div class="bento-img-overlay">
+            <h3>U.S.-Based Production</h3>
+            <p>Wichita, KS &amp; Dallas, TX</p>
+          </div>
+        </div>
+        <!-- END IMAGE SLOT -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 3: TEXTILE MANUFACTURING ───── -->
+  <div class="slide" data-slide="2">
+    <div class="slide-bg" style="background: linear-gradient(160deg, #000d2e 0%, #001852 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Manufacturing Capabilities</div>
+      <h2>Cut-and-Sew.<br><em>Sewn Goods. Textile Assembly.</em></h2>
+      <p class="subtitle wide">Full-scale textile manufacturing for precision sewn goods, tactical accessories, and high-volume nylon and webbing production. Single-unit prototyping through sustained production at scale.</p>
+
+      <div class="bento">
+        <div class="bento-card featured">
+          <div class="card-tag">Cut &amp; Sew</div>
+          <h3>Precision Sewing Operations</h3>
+          <p>Industrial sewing, multi-needle, and programmable pattern stitching for nylon, Cordura, elastic, and technical textiles. Reinforced construction for tactical-grade durability.</p>
+        </div>
+        <div class="bento-card">
+          <div class="card-tag">Materials</div>
+          <h3>Nylon, Webbing &amp; Technical Fabrics</h3>
+          <p>Domestic sourcing for ballistic nylon, elastic webbing, hook-and-loop, binding tape, snap hardware, and closure systems. Full material stack-up documentation.</p>
+        </div>
+        <div class="bento-card">
+          <div class="card-tag">Assembly</div>
+          <h3>Multi-Component Kitting</h3>
+          <p>Sewn goods combined with hardware, retention mechanisms, mounting systems, and packaging into finished, shelf-ready product.</p>
+        </div>
+        <!-- IMAGE SLOT: close-up textile sewing operation, nylon webbing, industrial sewing machine — dark, high-contrast -->
+        <div class="bento-img wide">
+          <div class="bento-img-overlay">
+            <h3>Production-Grade Textile Operations</h3>
+            <p>From single-SKU pilots to sustained high-volume production runs</p>
+          </div>
+        </div>
+        <!-- END IMAGE SLOT -->
+        <div class="bento-card">
+          <div class="card-tag">Scale</div>
+          <h3>Flexible Volume Capacity</h3>
+          <p>Pilot runs of hundreds of units through sustained annual volumes exceeding 100,000 per SKU. Workforce scales with demand.</p>
+        </div>
+        <div class="bento-card">
+          <div class="card-tag">Quality</div>
+          <h3>In-Line Quality Control</h3>
+          <p>Dimensional inspection, retention force testing, stitch integrity checks, and final QC at every stage. Documented and traceable to the unit level.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 4: PROTOTYPING & DEVELOPMENT ───── -->
+  <div class="slide" data-slide="3">
+    <div class="slide-bg" style="background: linear-gradient(160deg, #000d2e 0%, #001852 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Prototyping &amp; Development</div>
+      <h2>Sample to Production.<br><em>Controlled and Fast.</em></h2>
+      <p class="subtitle wide">Physical sample to approved production prototype in weeks, not months. Every stage documented, every revision controlled, and the transition to production happens in the same facility.</p>
+
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <h3>Sample Receipt &amp; Engineering Review</h3>
+          <p>Receive existing product, document dimensions, materials, construction, fit points, and retention geometry.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <h3>Domestic Material Sourcing &amp; Quote Basis</h3>
+          <p>Source domestic material equivalents, confirm construction approach, and define the cost basis for quoting.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <h3>Prototype Build &amp; Customer Review</h3>
+          <p>Build initial prototypes using approved materials and construction. Submit for customer review with full documentation.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <h3>Production Transition</h3>
+          <p>Lock cost basis, finalize routing, and move directly into production within the same facility. No handoff delay.</p>
+        </div>
+      </div>
+
+      <div class="bento" style="margin-top: 2rem;">
+        <div class="bento-card featured wide">
+          <div class="card-tag">Why This Matters</div>
+          <h3>Prototype and Production in the Same Facility</h3>
+          <p>No handoff between a development shop and a production floor. The team that builds the prototype runs production. Zero re-learning, zero translation loss, faster path to first shipment.</p>
+        </div>
+        <div class="bento-card">
+          <div class="card-tag">Execution</div>
+          <h3>Built to Your Specification</h3>
+          <p>Envision quotes and builds to the construction you approve. Materials, closures, reinforcement, and dimensional tolerances are locked before production begins. No surprises.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 5: PRODUCT FOCUS ───── -->
+  <div class="slide" data-slide="4">
+    <div class="slide-bg" style="background: linear-gradient(160deg, #000d2e 0%, #001852 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Product Focus</div>
+      <h2>Accessory Categories<br><em>Built for Platform Reuse.</em></h2>
+      <p class="subtitle wide">Three accessory categories across Streamlight's product portfolio. Shared construction principles and a single manufacturing architecture that scales across product families.</p>
+
+      <div class="product-cards">
+        <div class="product-card">
+          <div class="product-icon">⟐</div>
+          <h3>Headstrap Systems</h3>
+          <p>Elastic headstrap accessories used across helmet-mounted lighting families. Simple construction with controlled fit requirements and high annual volume.</p>
+          <div class="product-meta">
+            <span>Fastest Qualification Path</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-icon">⊞</div>
+          <h3>MOLLE Retention Adapters</h3>
+          <p>Replacement retention and mounting adapters for tactical lighting platforms. Webbing-based construction with hardware integration and controlled dimensional tolerances.</p>
+          <div class="product-meta">
+            <span>Hardware + Textile Integration</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-icon">⊡</div>
+          <h3>Nylon Holster Systems</h3>
+          <p>Multi-fit nylon holsters serving multiple flashlight families. One base body architecture with controlled variations in depth, flap length, and closure.</p>
+          <div class="product-meta">
+            <span>Platform Expansion Opportunity</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="img-break-inline">
+        <div class="slide-bg" style="background: linear-gradient(135deg, #001852, #003087, #001030);"></div>
+        <div class="slide-overlay" style="background: linear-gradient(90deg, rgba(0,13,46,0.97) 0%, rgba(0,24,82,0.7) 50%, rgba(0,13,46,0.4) 100%);"></div>
+        <!-- IMAGE SLOT: tactical accessories flat lay — holsters, straps, MOLLE gear, dark background -->
+        <blockquote>One manufacturing architecture. <span>Multiple product families.</span> Designed for platform reuse from day one.</blockquote>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 6: QUALITY & COMPLIANCE ───── -->
+  <div class="slide" data-slide="5">
+    <div class="slide-bg" style="background: linear-gradient(160deg, #000d2e 0%, #001852 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Quality &amp; Compliance</div>
+      <h2>TAA-Compliant. Made in USA.<br><em>Documented and Traceable.</em></h2>
+      <p class="subtitle wide">U.S.-based production facilities, domestic materials sourcing, and ISO-certified quality management. Every product documented and traceable from material receipt through shipment.</p>
+
+      <div class="compliance-row">
+        <div class="compliance-badge">
+          <div class="badge-icon">TAA</div>
+          <div class="badge-text">
+            <h3>Trade Agreements Act</h3>
+            <p>All production in the United States. Domestic materials sourcing supports full compliance for government and commercial channels.</p>
+          </div>
+        </div>
+        <div class="compliance-badge">
+          <div class="badge-icon">USA</div>
+          <div class="badge-text">
+            <h3>Made in America</h3>
+            <p>Manufacturing, assembly, QC, and fulfillment based in Wichita, KS and Dallas, TX. No offshore dependencies.</p>
+          </div>
+        </div>
+        <div class="compliance-badge">
+          <div class="badge-icon">ISO</div>
+          <div class="badge-text">
+            <h3>ISO 9001:2015 Certified</h3>
+            <p>Certified quality management across production. Documented processes, controlled revisions, traceable outputs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento">
+        <div class="bento-card featured wide">
+          <div class="card-tag">Quality Process</div>
+          <h3>Production Quality at Every Stage</h3>
+          <p>Incoming material inspection, in-process dimensional checks, stitch and construction integrity verification, retention force testing, and final QC before packaging. Every lot documented. Every unit traceable.</p>
+        </div>
+        <div class="bento-card">
+          <div class="card-tag">Supply Chain</div>
+          <h3>Domestic Material Sourcing</h3>
+          <p>Established U.S.-based sourcing for nylon, Cordura, elastic webbing, hook-and-loop, binding, snap hardware, and packaging. Alternates identified and documented during development.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 7: FULFILLMENT & SCALE ───── -->
+  <div class="slide" data-slide="6">
+    <div class="slide-bg" style="background: linear-gradient(160deg, #000d2e 0%, #001852 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Fulfillment &amp; Scale</div>
+      <h2>Production to Delivery.<br><em>Under One Roof.</em></h2>
+      <p class="subtitle wide">Inventory management, pick-and-pack, packaging, labeling, and direct shipment to your locations. Manufacturing and fulfillment in the same facility. No transfer delays.</p>
+
+      <div class="bento">
+        <div class="bento-card">
+          <div class="card-tag">Inventory</div>
+          <h3>Inventory Management &amp; Visibility</h3>
+          <p>Real-time inventory tracking, forecast-based production planning, and blanket PO support. Proactive scheduling, not reactive ordering.</p>
+        </div>
+        <div class="bento-card">
+          <div class="card-tag">Fulfillment</div>
+          <h3>Pick, Pack &amp; Ship</h3>
+          <p>Finished goods move directly from QC to packaging and shipping. No facility transfers, no third-party handoffs.</p>
+        </div>
+        <div class="bento-card">
+          <div class="card-tag">Shipping</div>
+          <h3>Flexible Ship Cadence</h3>
+          <p>Support for scheduled shipments, on-demand releases, and multi-location distribution. Freight treatment configurable per program requirements.</p>
+        </div>
+        <!-- IMAGE SLOT: warehouse fulfillment operations — pick and pack, shipping, logistics floor -->
+        <div class="bento-img">
+          <div class="bento-img-overlay">
+            <h3>Integrated Fulfillment</h3>
+            <p>Same facility. Zero transfer delays.</p>
+          </div>
+        </div>
+        <!-- END IMAGE SLOT -->
+        <div class="bento-card wide">
+          <div class="card-tag">Scale</div>
+          <h3>Volume-Ready Infrastructure</h3>
+          <p>From initial pilot volumes through sustained annual production across multiple SKUs. Production capacity and workforce scale with demand. No ceiling on growth within existing facilities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 8: PARTNERSHIP MODEL ───── -->
+  <div class="slide" data-slide="7">
+    <div class="slide-bg" style="background: linear-gradient(160deg, #000d2e 0%, #001852 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Partnership Model</div>
+      <h2>A Domestic Accessory Partner.<br><em>Not a One-Off Supplier.</em></h2>
+      <p class="subtitle wide">A long-term domestic manufacturing partner for Streamlight's full accessory ecosystem. Start with a pilot, expand as the program proves out.</p>
+
+      <div class="partnership-grid">
+        <div class="partner-card">
+          <div class="card-tag">Phase 1</div>
+          <h3>Pilot Program</h3>
+          <p>Start with the highest-readiness accessory category. Receive samples, complete engineering review, build prototypes, lock cost basis, and deliver production-quality units for evaluation.</p>
+        </div>
+        <div class="partner-card">
+          <div class="card-tag">Phase 2</div>
+          <h3>Production &amp; Expansion</h3>
+          <p>Move approved pilot into sustained production. Add accessory categories using the same manufacturing architecture and established quality systems.</p>
+        </div>
+        <div class="partner-card highlight">
+          <div class="card-tag">Long-Term Vision</div>
+          <h3>Broader Domestic Accessory Platform</h3>
+          <p>Streamlight's accessory ecosystem extends well beyond these three categories: helmet mounts, rail mounts, replacement parts, and related kits across multiple product families. Envision absorbs additional product lines without retooling. One domestic source that scales with your portfolio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SLIDE 9: CLOSING / NEXT STEPS ───── -->
+  <div class="slide" data-slide="8">
+    <div class="slide-bg" style="background: linear-gradient(135deg, #001852 0%, #003087 40%, #000d2e 100%);"></div>
+    <div class="slide-overlay" style="background: linear-gradient(to bottom, rgba(0,13,46,0.5) 0%, rgba(0,13,46,0.75) 50%, rgba(0,13,46,0.9) 100%);"></div>
+    <div class="slide-grain"></div>
+    <div class="slide-content centered">
+      <div class="logo-mark">ENVISION<span>.</span></div>
+      <div class="eyebrow" style="margin-top: 2rem;">Next Steps</div>
+      <h2>Ready to <em>Move Forward.</em></h2>
+      <p class="subtitle" style="margin-bottom: 2.5rem;">Ready to receive samples, start engineering review, and deliver prototypes on an accelerated timeline. Next step: confirm the launch SKU, lock the quote basis, and define the commercial framework.</p>
+
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-role">Envision Contact</div>
+          <div class="contact-name">[Name]</div>
+          <div class="contact-title">[Title]</div>
+          <div class="contact-info">[email] · [phone]</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-role">Envision Contact</div>
+          <div class="contact-name">[Name]</div>
+          <div class="contact-title">[Title]</div>
+          <div class="contact-info">[email] · [phone]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── KEYBOARD HINT ── -->
+<div class="key-hint">
+  <kbd>←</kbd> <kbd>→</kbd> to navigate
+</div>
+
+<!-- ════════════════════════════════════════ JS ════════════════════════════════════════ -->
+<script>
+  let currentSlide = 0;
+  const totalSlides = 9;
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('navDots');
+  const currentEl = document.getElementById('currentSlide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  // Build dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  }
+
+  function goToSlide(n) {
+    if (n < 0 || n >= totalSlides) return;
+    slides[currentSlide].classList.remove('active');
+    dotsContainer.children[currentSlide].classList.remove('active');
+    currentSlide = n;
+    slides[currentSlide].classList.add('active');
+    dotsContainer.children[currentSlide].classList.add('active');
+    currentEl.textContent = String(currentSlide + 1).padStart(2, '0');
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === totalSlides - 1;
+    // Reset scroll on new slide
+    slides[currentSlide].scrollTop = 0;
+  }
+
+  function changeSlide(dir) {
+    goToSlide(currentSlide + dir);
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); changeSlide(1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); changeSlide(-1); }
+  });
+
+  // Touch swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+  document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 60) {
+      if (diff > 0) changeSlide(1);
+      else changeSlide(-1);
+    }
+  });
+
+  // Init
+  prevBtn.disabled = true;
+</script>
+
+</body>
+</html>
