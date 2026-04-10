@@ -452,6 +452,24 @@
       border-left: 2px solid var(--green);
       grid-column: span 2;
     }
+    .partner-card.unlock-box {
+      position: relative;
+      background: linear-gradient(140deg, #001852 0%, #002878 100%);
+      border: 1px solid rgba(120,190,33,0.45);
+      border-left: 2px solid var(--green);
+      grid-column: span 2;
+      box-shadow:
+        0 0 0 1px rgba(120,190,33,0.08),
+        0 0 28px rgba(120,190,33,0.18),
+        inset 0 0 24px rgba(120,190,33,0.04);
+    }
+    .partner-card.unlock-box h3 { letter-spacing: -0.005em; }
+    .unlock-word {
+      color: var(--green);
+      font-style: normal;
+      font-weight: 800;
+      text-shadow: 0 0 14px rgba(120,190,33,0.55);
+    }
 
     /* ── CLOSING SLIDE ── */
     .close-block {
@@ -530,6 +548,48 @@
     .slide.active .partnership-grid,
     .slide.active .two-col,
     .slide.active .close-block { animation: fadeUp 0.6s 0.4s ease both; }
+
+    /* ── UNLOCK REVEAL ── */
+    @keyframes unlockReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.985);
+        border-color: rgba(120,190,33,0);
+        box-shadow:
+          0 0 0 1px rgba(120,190,33,0),
+          0 0 0 rgba(120,190,33,0),
+          inset 0 0 0 rgba(120,190,33,0);
+      }
+      55% {
+        opacity: 1;
+        transform: translateY(0) scale(1.005);
+        border-color: rgba(120,190,33,0.9);
+        box-shadow:
+          0 0 0 1px rgba(120,190,33,0.35),
+          0 0 70px rgba(120,190,33,0.55),
+          inset 0 0 40px rgba(120,190,33,0.1);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        border-color: rgba(120,190,33,0.45);
+        box-shadow:
+          0 0 0 1px rgba(120,190,33,0.08),
+          0 0 28px rgba(120,190,33,0.18),
+          inset 0 0 24px rgba(120,190,33,0.04);
+      }
+    }
+    @keyframes unlockWordGlow {
+      0%   { opacity: 0; text-shadow: 0 0 0 rgba(120,190,33,0); }
+      55%  { opacity: 1; text-shadow: 0 0 22px rgba(120,190,33,0.9); }
+      100% { opacity: 1; text-shadow: 0 0 14px rgba(120,190,33,0.55); }
+    }
+    .slide.active .partner-card.unlock-box {
+      animation: unlockReveal 1.1s 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+    .slide.active .partner-card.unlock-box .unlock-word {
+      animation: unlockWordGlow 1.1s 0.85s ease both;
+    }
 
     /* ── CLOSING SLIDE HALLWAY ZOOM ── */
     @keyframes hallwayZoom {
@@ -992,9 +1052,9 @@
           <h3>Production &amp; Expansion</h3>
           <p>Move approved pilot into sustained production. Add accessory categories using the same manufacturing architecture and established quality systems.</p>
         </div>
-        <div class="partner-card highlight">
+        <div class="partner-card unlock-box">
           <div class="card-tag">Long-Term Vision</div>
-          <h3>Broader Domestic Accessory Platform</h3>
+          <h3>What Does This Partnership <span class="unlock-word">Unlock</span>?</h3>
           <p>Streamlight's accessory ecosystem extends well beyond these three categories: helmet mounts, rail mounts, replacement parts, and related kits across multiple product families. Envision absorbs additional product lines without retooling. One domestic source that scales with your portfolio.</p>
         </div>
       </div>
