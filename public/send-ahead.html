@@ -72,6 +72,21 @@
     h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
     .subtitle { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; max-width: 760px; }
     .hero .subtitle, .closing .subtitle { margin: 0 auto; }
+    .image-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-dark);
+    }
+    .image-strip img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.72;
+    }
 
     .stats-band, .bento, .process-flow, .product-cards, .compliance-row, .partnership-grid {
       display: grid; gap: 2px; background: rgba(255,255,255,0.04); margin-top: 1rem;
@@ -145,7 +160,7 @@
     @media (max-width: 900px) {
       .panel { padding: 1.35rem; }
       .stats-band { grid-template-columns: repeat(2, 1fr); }
-      .bento, .product-cards, .compliance-row, .tease-grid, .contact-cards, .partnership-grid, .process-flow { grid-template-columns: 1fr; }
+      .bento, .product-cards, .compliance-row, .tease-grid, .contact-cards, .partnership-grid, .process-flow, .image-strip { grid-template-columns: 1fr; }
       .bento-card.wide, .partner-card.highlight { grid-column: span 1; }
     }
 
@@ -172,6 +187,11 @@
         <div class="eyebrow">Domestic Manufacturing Partnership</div>
         <h1>Built in America.<br>Built to <em>Your Standard.</em></h1>
         <p class="subtitle">Domestic manufacturing for Streamlight's accessory portfolio. TAA-compliant, Berry-compliant, and built to scale from a single U.S. source.</p>
+        <div class="image-strip">
+          <img src="/images/envision-floor.jpg" alt="Envision production floor">
+          <img src="/images/envision-hero.jpg" alt="Envision operations">
+          <img src="/images/envision-feature.jpg" alt="Envision feature view">
+        </div>
       </div>
     </section>
 
@@ -232,13 +252,13 @@
         <p class="subtitle">Physical sample to approved production prototype in weeks, not months. Every stage documented, every revision controlled, and the transition to production happens in the same facility.</p>
 
         <div class="process-flow">
-          <details class="disclosure process-step" open><summary><div class="step-num">01</div><h3>Sample Receipt &amp; Engineering Review</h3></summary><div class="disclosure-content"><p>Receive existing product, document dimensions, materials, construction, fit points, and retention geometry.</p></div></details>
-          <details class="disclosure process-step" open><summary><div class="step-num">02</div><h3>Domestic Material Sourcing &amp; Quote Basis</h3></summary><div class="disclosure-content"><p>Source domestic material equivalents, confirm construction approach, and define the cost basis for quoting.</p></div></details>
-          <details class="disclosure process-step" open><summary><div class="step-num">03</div><h3>Prototype Build &amp; Customer Review</h3></summary><div class="disclosure-content"><p>Build initial prototypes using approved materials and construction. Submit for customer review with full documentation.</p></div></details>
-          <details class="disclosure process-step" open><summary><div class="step-num">04</div><h3>Production Transition</h3></summary><div class="disclosure-content"><p>Lock cost basis, finalize routing, and move directly into production within the same facility. No handoff delay.</p></div></details>
+          <details class="disclosure process-step"><summary><div class="step-num">01</div><h3>Sample Receipt &amp; Engineering Review</h3></summary><div class="disclosure-content"><p>Receive existing product, document dimensions, materials, construction, fit points, and retention geometry.</p></div></details>
+          <details class="disclosure process-step"><summary><div class="step-num">02</div><h3>Domestic Material Sourcing &amp; Quote Basis</h3></summary><div class="disclosure-content"><p>Source domestic material equivalents, confirm construction approach, and define the cost basis for quoting.</p></div></details>
+          <details class="disclosure process-step"><summary><div class="step-num">03</div><h3>Prototype Build &amp; Customer Review</h3></summary><div class="disclosure-content"><p>Build initial prototypes using approved materials and construction. Submit for customer review with full documentation.</p></div></details>
+          <details class="disclosure process-step"><summary><div class="step-num">04</div><h3>Production Transition</h3></summary><div class="disclosure-content"><p>Lock cost basis, finalize routing, and move directly into production within the same facility. No handoff delay.</p></div></details>
         </div>
 
-        <details class="disclosure" open>
+        <details class="disclosure">
           <summary>Why This Matters</summary>
           <div class="disclosure-content">
             <div class="bento" style="margin-top:0;">
@@ -257,9 +277,9 @@
         <h2>Accessory Categories<br><em>Built for Platform Reuse.</em></h2>
         <p class="subtitle">Three accessory categories across Streamlight's product portfolio. Shared construction principles and a single manufacturing architecture that scales across product families.</p>
         <div class="product-cards">
-          <details class="disclosure product-card" open><summary><div class="product-icon">⟐</div><h3>Headstrap Systems</h3></summary><div class="disclosure-content"><p>Elastic headstrap accessories used across helmet-mounted lighting families. Simple construction with controlled fit requirements and high annual volume.</p><div class="product-meta"><span>Fastest Qualification Path</span></div></div></details>
-          <details class="disclosure product-card" open><summary><div class="product-icon">⊞</div><h3>MOLLE Retention Adapters</h3></summary><div class="disclosure-content"><p>Replacement retention and mounting adapters for tactical lighting platforms. Webbing-based construction with hardware integration and controlled dimensional tolerances.</p><div class="product-meta"><span>Hardware + Textile Integration</span></div></div></details>
-          <details class="disclosure product-card" open><summary><div class="product-icon">⊡</div><h3>Nylon Holster Systems</h3></summary><div class="disclosure-content"><p>Multi-fit nylon holsters serving multiple flashlight families. One base body architecture with controlled variations in depth, flap length, and closure.</p><div class="product-meta"><span>Platform Expansion Opportunity</span></div></div></details>
+          <details class="disclosure product-card"><summary><div class="product-icon">⟐</div><h3>Headstrap Systems</h3></summary><div class="disclosure-content"><p>Elastic headstrap accessories used across helmet-mounted lighting families. Simple construction with controlled fit requirements and high annual volume.</p><div class="product-meta"><span>Fastest Qualification Path</span></div></div></details>
+          <details class="disclosure product-card"><summary><div class="product-icon">⊞</div><h3>MOLLE Retention Adapters</h3></summary><div class="disclosure-content"><p>Replacement retention and mounting adapters for tactical lighting platforms. Webbing-based construction with hardware integration and controlled dimensional tolerances.</p><div class="product-meta"><span>Hardware + Textile Integration</span></div></div></details>
+          <details class="disclosure product-card"><summary><div class="product-icon">⊡</div><h3>Nylon Holster Systems</h3></summary><div class="disclosure-content"><p>Multi-fit nylon holsters serving multiple flashlight families. One base body architecture with controlled variations in depth, flap length, and closure.</p><div class="product-meta"><span>Platform Expansion Opportunity</span></div></div></details>
         </div>
       </div>
     </section>
@@ -277,7 +297,7 @@
           <article class="compliance-badge"><div class="badge-icon">ISO</div><div><h3>ISO 9001:2015 Certified</h3><p>Certified quality management across production. Documented processes, controlled revisions, traceable outputs.</p></div></article>
         </div>
 
-        <details class="disclosure" open>
+        <details class="disclosure">
           <summary>Quality Process</summary>
           <div class="disclosure-content">
             <div class="bento" style="margin-top:0;">
@@ -317,7 +337,7 @@
           <article class="partner-card highlight"><div class="card-tag">Long-Term Vision</div><h3>Broader Domestic Accessory Platform</h3><p>Streamlight's ecosystem extends well beyond these three categories — helmet mounts, rail mounts, replacement parts, and kits across product families. One domestic source that scales with your portfolio, no retooling required.</p></article>
         </div>
 
-        <details class="disclosure" open>
+        <details class="disclosure">
           <summary>What This Partnership Unlocks</summary>
           <div class="disclosure-content">
             <div class="value-tease" style="margin-top:0;">
@@ -341,6 +361,12 @@
         <div class="eyebrow" style="margin-top: 2rem;">Next Steps</div>
         <h2>Ready to <em>Move Forward.</em></h2>
         <p class="subtitle" style="margin-bottom: 1.5rem;">Ready to receive samples, start engineering review, and deliver prototypes on an accelerated timeline. Next step: confirm the launch SKU, lock the quote basis, and define the commercial framework.</p>
+
+        <div class="image-strip" style="margin-bottom:1rem;">
+          <img src="/images/production-inspection.jpg" alt="Production inspection">
+          <img src="/images/production-press.jpg" alt="Production press operations">
+          <img src="/images/production-templates.jpg" alt="Template and tooling work">
+        </div>
 
         <div class="contact-cards">
           <div class="contact-card"><div class="contact-role">Envision Contact</div><div class="contact-name">Kathy Vines</div><div class="contact-title">Vice President ‑ Strategic Partnerships &amp; Customer Care</div><div class="contact-info">kathy.vines@envisionus.com</div></div>
