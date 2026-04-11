@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envision × Streamlight — Domestic Manufacturing Partnership</title>
+  <meta name="description" content="Domestic manufacturing for Streamlight's accessory portfolio. TAA-compliant, Berry-compliant, and built to scale from a single U.S. source.">
+  <meta property="og:title" content="Envision × Streamlight — Domestic Manufacturing Partnership">
+  <meta property="og:description" content="Domestic manufacturing for Streamlight's accessory portfolio. TAA-compliant, Berry-compliant, and built to scale from a single U.S. source.">
+  <meta property="og:image" content="/images/envision-logo-white.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/images/envision-hand-logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #003087;
+      --blue-dark: #001852;
+      --green: #78BE21;
+      --text-light: #ffffff;
+      --text-muted: rgba(255,255,255,0.65);
+      --bg-body: #000d2e;
+      --border-dark: rgba(255,255,255,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      background: var(--bg-body);
+      color: var(--text-light);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: rgba(0,13,46,0.85);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .topbar img { height: 24px; }
+    main { max-width: 1160px; margin: 0 auto; padding: 1.25rem 1.5rem 3rem; }
+    .panel {
+      position: relative;
+      background: linear-gradient(160deg, #000d2e 0%, #001852 100%);
+      border: 1px solid var(--border-dark);
+      margin-bottom: 1rem;
+      padding: 2rem;
+      overflow: hidden;
+    }
+    .panel.hero, .panel.closing { text-align: center; }
+    .hero-bg, .closing-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(135deg, #001852 0%, #003087 40%, #000d2e 100%);
+    }
+    .hero-bg img, .closing-bg img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.22;
+    }
+    .overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(0,13,46,0.65), rgba(0,13,46,0.92)); }
+    .content { position: relative; z-index: 2; }
+    .eyebrow {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 0.75rem;
+      display: inline-flex; align-items: center; gap: 0.75rem;
+    }
+    .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--green); opacity: 0.7; }
+    h1 { font-size: clamp(2.3rem, 5vw, 4.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 1.1rem; }
+    h2 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.65rem; }
+    h1 em, h2 em { font-style: normal; color: var(--green); }
+    h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .subtitle { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; max-width: 760px; }
+    .hero .subtitle, .closing .subtitle { margin: 0 auto; }
+    .image-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-dark);
+    }
+    .image-strip img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.72;
+    }
+
+    .stats-band, .bento, .process-flow, .product-cards, .compliance-row, .partnership-grid {
+      display: grid; gap: 2px; background: rgba(255,255,255,0.04); margin-top: 1rem;
+    }
+    .stats-band { grid-template-columns: repeat(4, 1fr); gap: 1px; }
+    .stat-cell, .bento-card, .process-step, .product-card, .compliance-badge, .partner-card {
+      background: rgba(0,13,46,0.75);
+    }
+    .stat-cell { padding: 1.1rem 1rem; text-align: center; }
+    .stat-n { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; }
+    .stat-n span { color: var(--green); }
+    .stat-l { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.5rem; }
+
+    .bento { grid-template-columns: repeat(3, 1fr); }
+    .bento-card { padding: 1.1rem; }
+    .bento-card.wide { grid-column: span 2; }
+    .bento-card.featured, .partner-card.highlight {
+      background: linear-gradient(140deg, #001852 0%, #002878 100%);
+      border-left: 2px solid var(--green);
+    }
+    .card-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .card-tag::before { content: ''; width: 12px; height: 1px; background: var(--green); }
+    p { font-size: 0.78rem; line-height: 1.6; color: rgba(255,255,255,0.88); }
+
+    .bento-img { position: relative; min-height: 140px; background: linear-gradient(135deg, #001852, #003087); }
+    .bento-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
+    .bento-img-overlay { position: absolute; inset: 0; padding: 1.1rem; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top, rgba(0,13,46,0.95), rgba(0,13,46,0.3) 55%, transparent); }
+
+    .process-flow { grid-template-columns: repeat(4, 1fr); }
+    .process-step { padding: 1rem; text-align: center; }
+    .step-num { font-size: 1.7rem; color: var(--green); font-weight: 800; margin-bottom: 0.4rem; }
+
+    .product-cards { grid-template-columns: repeat(3, 1fr); }
+    .product-card { padding: 1.1rem; display: flex; flex-direction: column; }
+    .product-icon { width: 36px; height: 36px; background: rgba(120,190,33,0.08); border: 1px solid rgba(120,190,33,0.15); border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; }
+    .product-meta { margin-top: auto; padding-top: 0.6rem; border-top: 1px solid var(--border-dark); }
+    .product-meta span { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+
+    .compliance-row { grid-template-columns: repeat(3, 1fr); }
+    .compliance-badge { padding: 1rem; display: flex; gap: 0.8rem; }
+    .badge-icon { width: 40px; height: 40px; min-width: 40px; background: rgba(120,190,33,0.06); border: 1px solid rgba(120,190,33,0.12); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; color: var(--green); }
+
+    .partnership-grid { grid-template-columns: repeat(2, 1fr); }
+    .partner-card { padding: 1.1rem; }
+    .partner-card.highlight { grid-column: span 2; }
+
+    .impact-line { margin-top: 0.75rem; padding: 0.7rem 0.95rem; background: rgba(120,190,33,0.06); border-left: 2px solid var(--green); font-size: 0.82rem; line-height: 1.6; max-width: 800px; }
+    .impact-line span, .unlock-word { color: var(--green); font-weight: 700; }
+
+    .value-tease { margin-top: 1rem; padding: 0.95rem 1.1rem 1.05rem; background: rgba(0,24,82,0.28); border: 1px solid rgba(120,190,33,0.45); border-left: 2px solid var(--green); }
+    .tease-header { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .tease-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .tease-item h4 { font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .tease-item p { font-size: 0.74rem; }
+
+    details.disclosure { margin-top: 0.75rem; border: 1px solid var(--border-dark); background: rgba(0,24,82,0.22); }
+    details.disclosure > summary {
+      list-style: none; cursor: pointer; padding: 0.7rem 0.9rem; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700;
+    }
+    details.disclosure > summary::-webkit-details-marker { display: none; }
+    details.disclosure > summary:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
+    details.disclosure .disclosure-content { padding: 0 0.9rem 0.9rem; }
+
+    .contact-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 1rem; background: rgba(255,255,255,0.04); }
+    .contact-card { background: rgba(0,24,82,0.4); border: 1px solid var(--border-dark); padding: 1.1rem; text-align: center; }
+    .contact-role { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 0.7rem; }
+    .contact-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .contact-title { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 0.65rem; }
+    .contact-info { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+
+    @media (max-width: 900px) {
+      .panel { padding: 1.35rem; }
+      .stats-band { grid-template-columns: repeat(2, 1fr); }
+      .bento, .product-cards, .compliance-row, .tease-grid, .contact-cards, .partnership-grid, .process-flow, .image-strip { grid-template-columns: 1fr; }
+      .bento-card.wide, .partner-card.highlight { grid-column: span 1; }
+    }
+
+    @media print {
+      .topbar { position: static; }
+      .panel { break-inside: avoid; }
+      details.disclosure[open] summary { color: #78BE21; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <img src="/images/envision-hand-logo.png" alt="Envision">
+  </header>
+
+  <main>
+    <section class="panel hero" id="hero">
+      <div class="hero-bg">
+        <img src="/images/envision-floor.jpg" alt="">
+      </div>
+      <div class="overlay"></div>
+      <div class="content">
+        <img src="/images/envision-logo-white.png" alt="Envision" style="height: 48px; margin-bottom: 1.5rem;">
+        <div class="eyebrow">Domestic Manufacturing Partnership</div>
+        <h1>Built in America.<br>Built to <em>Your Standard.</em></h1>
+        <p class="subtitle">Domestic manufacturing for Streamlight's accessory portfolio. TAA-compliant, Berry-compliant, and built to scale from a single U.S. source.</p>
+        <div class="image-strip">
+          <img src="/images/envision-floor.jpg" alt="Envision production floor">
+          <img src="/images/envision-hero.jpg" alt="Envision operations">
+          <img src="/images/envision-feature.jpg" alt="Envision feature view">
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="content">
+        <div class="eyebrow">About Envision</div>
+        <h2>Enterprise Manufacturing.<br><em>Domestic Infrastructure.</em></h2>
+        <p class="subtitle">Large-scale manufacturing, assembly, and fulfillment across multiple U.S. facilities. Production-grade output for commercial, enterprise, and government customers with full compliance infrastructure.</p>
+
+        <div class="stats-band">
+          <div class="stat-cell"><div class="stat-n">340<span>K+</span></div><div class="stat-l">Sq. Ft. Production Space</div></div>
+          <div class="stat-cell"><div class="stat-n">Berry</div><div class="stat-l">Amendment Compliant</div></div>
+          <div class="stat-cell"><div class="stat-n">90<span>+</span></div><div class="stat-l">Years Operating<br><span style="font-size:0.85em;opacity:0.75;">Since the 1930s</span></div></div>
+          <div class="stat-cell"><div class="stat-n">TAA</div><div class="stat-l">Compliant Production</div></div>
+        </div>
+
+        <div class="bento">
+          <article class="bento-card featured wide">
+            <div class="card-tag">Core Advantage</div>
+            <h3>Vertically Integrated Domestic Operations</h3>
+            <p>Manufacturing, assembly, QC, packaging, and fulfillment under one roof. No offshore dependencies. Full visibility from prototype through shipment.</p>
+          </article>
+          <div class="bento-img">
+            <img src="/images/production-inspection.jpg" alt="Production inspection">
+            <div class="bento-img-overlay">
+              <h3>U.S.-Based Production</h3>
+              <p>Wichita, KS &amp; Dallas, TX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="content">
+        <div class="eyebrow">Manufacturing Capabilities</div>
+        <h2>Cut-and-Sew.<br><em>Sewn Goods. Textile Assembly.</em></h2>
+        <p class="subtitle">Full-scale textile manufacturing for precision sewn goods, tactical accessories, and high-volume nylon and webbing production. Single-unit prototyping through sustained production at scale.</p>
+
+        <div class="bento">
+          <article class="bento-card featured"><div class="card-tag">Cut &amp; Sew</div><h3>Precision Sewing Operations</h3><p>Industrial sewing, multi-needle, and programmable pattern stitching for nylon, Cordura, elastic, and technical textiles. Reinforced construction for tactical-grade durability.</p></article>
+          <article class="bento-card"><div class="card-tag">Materials</div><h3>Nylon, Webbing &amp; Technical Fabrics</h3><p>Domestic sourcing for ballistic nylon, elastic webbing, hook-and-loop, binding tape, snap hardware, and closure systems. Full material stack-up documentation.</p></article>
+          <article class="bento-card"><div class="card-tag">Assembly</div><h3>Multi-Component Kitting</h3><p>Sewn goods combined with hardware, retention mechanisms, mounting systems, and packaging into finished, shelf-ready product.</p></article>
+          <div class="bento-img" style="grid-column: span 2;">
+            <img src="/images/production-press.jpg" alt="Production press operations">
+            <div class="bento-img-overlay"><h3>Production-Grade Textile Operations</h3><p>Low-volume initial runs through sustained high-volume production</p></div>
+          </div>
+          <article class="bento-card"><div class="card-tag">Scale</div><h3>Flexible Volume Capacity</h3><p>Pilot runs of hundreds of units through sustained annual volumes exceeding 100,000 per SKU. Workforce scales with demand.</p></article>
+          <article class="bento-card"><div class="card-tag">Quality</div><h3>In-Line Quality Control</h3><p>Dimensional inspection, retention force testing, stitch integrity checks, and final QC at every stage. Documented and traceable to the unit level.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="content">
+        <div class="eyebrow">Prototyping &amp; Development</div>
+        <h2>Sample to Production.<br><em>Controlled and Fast.</em></h2>
+        <p class="subtitle">Physical sample to approved production prototype in weeks, not months. Every stage documented, every revision controlled, and the transition to production happens in the same facility.</p>
+
+        <div class="process-flow">
+          <details class="disclosure process-step"><summary><div class="step-num">01</div><h3>Sample Receipt &amp; Engineering Review</h3></summary><div class="disclosure-content"><p>Receive existing product, document dimensions, materials, construction, fit points, and retention geometry.</p></div></details>
+          <details class="disclosure process-step"><summary><div class="step-num">02</div><h3>Domestic Material Sourcing &amp; Quote Basis</h3></summary><div class="disclosure-content"><p>Source domestic material equivalents, confirm construction approach, and define the cost basis for quoting.</p></div></details>
+          <details class="disclosure process-step"><summary><div class="step-num">03</div><h3>Prototype Build &amp; Customer Review</h3></summary><div class="disclosure-content"><p>Build initial prototypes using approved materials and construction. Submit for customer review with full documentation.</p></div></details>
+          <details class="disclosure process-step"><summary><div class="step-num">04</div><h3>Production Transition</h3></summary><div class="disclosure-content"><p>Lock cost basis, finalize routing, and move directly into production within the same facility. No handoff delay.</p></div></details>
+        </div>
+
+        <details class="disclosure">
+          <summary>Why This Matters</summary>
+          <div class="disclosure-content">
+            <div class="bento" style="margin-top:0;">
+              <article class="bento-card featured"><div class="card-tag">Why This Matters</div><h3>Prototype and Production in the Same Facility</h3><p>No handoff between a development shop and a production floor. The team that builds the prototype runs production. Zero re-learning, zero translation loss, faster path to first shipment.</p></article>
+              <article class="bento-card"><div class="card-tag">Execution</div><h3>Built to Your Specification</h3><p>Envision quotes and builds to the construction you approve. Materials, closures, reinforcement, and dimensional tolerances are locked before production begins. No surprises.</p></article>
+              <div class="bento-img"><img src="/images/production-templates.jpg" alt="Template and tooling work"><div class="bento-img-overlay"><h3>Hands-On Prototyping</h3><p>Templates, tooling, and pattern development</p></div></div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="content">
+        <div class="eyebrow">Product Focus</div>
+        <h2>Accessory Categories<br><em>Built for Platform Reuse.</em></h2>
+        <p class="subtitle">Three accessory categories across Streamlight's product portfolio. Shared construction principles and a single manufacturing architecture that scales across product families.</p>
+        <div class="product-cards">
+          <details class="disclosure product-card"><summary><div class="product-icon">⟐</div><h3>Headstrap Systems</h3></summary><div class="disclosure-content"><p>Elastic headstrap accessories used across helmet-mounted lighting families. Simple construction with controlled fit requirements and high annual volume.</p><div class="product-meta"><span>Fastest Qualification Path</span></div></div></details>
+          <details class="disclosure product-card"><summary><div class="product-icon">⊞</div><h3>MOLLE Retention Adapters</h3></summary><div class="disclosure-content"><p>Replacement retention and mounting adapters for tactical lighting platforms. Webbing-based construction with hardware integration and controlled dimensional tolerances.</p><div class="product-meta"><span>Hardware + Textile Integration</span></div></div></details>
+          <details class="disclosure product-card"><summary><div class="product-icon">⊡</div><h3>Nylon Holster Systems</h3></summary><div class="disclosure-content"><p>Multi-fit nylon holsters serving multiple flashlight families. One base body architecture with controlled variations in depth, flap length, and closure.</p><div class="product-meta"><span>Platform Expansion Opportunity</span></div></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="content">
+        <div class="eyebrow">Quality &amp; Compliance</div>
+        <h2>TAA-Compliant. Made in USA.<br><em>Documented and Traceable.</em></h2>
+        <p class="subtitle">U.S.-based production facilities, domestic materials sourcing, and ISO-certified quality management. Every product documented and traceable from material receipt through shipment.</p>
+        <p class="impact-line"><span>Directly addresses</span> the domestic sourcing pressure currently on Streamlight's accessory supply chain — a TAA-compliant U.S. source, ready now.</p>
+
+        <div class="compliance-row">
+          <article class="compliance-badge"><div class="badge-icon">TAA</div><div><h3>Trade Agreements Act</h3><p>All production in the United States. Domestic materials sourcing supports full compliance for government and commercial channels.</p></div></article>
+          <article class="compliance-badge"><div class="badge-icon">USA</div><div><h3>Made in America</h3><p>Manufacturing, assembly, QC, and fulfillment based in Wichita, KS and Dallas, TX. No offshore dependencies.</p></div></article>
+          <article class="compliance-badge"><div class="badge-icon">ISO</div><div><h3>ISO 9001:2015 Certified</h3><p>Certified quality management across production. Documented processes, controlled revisions, traceable outputs.</p></div></article>
+        </div>
+
+        <details class="disclosure">
+          <summary>Quality Process</summary>
+          <div class="disclosure-content">
+            <div class="bento" style="margin-top:0;">
+              <article class="bento-card featured wide"><div class="card-tag">Quality Process</div><h3>Production Quality at Every Stage</h3><p>Incoming material inspection, in-process dimensional checks, stitch and construction integrity verification, retention force testing, and final QC before packaging. Every lot documented. Every unit traceable.</p></article>
+              <article class="bento-card"><div class="card-tag">Supply Chain</div><h3>Domestic Material Sourcing</h3><p>Established U.S.-based sourcing for nylon, Cordura, elastic webbing, hook-and-loop, binding, snap hardware, and packaging. Alternates identified and documented during development.</p></article>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="content">
+        <div class="eyebrow">Fulfillment &amp; Scale</div>
+        <h2>Production to Delivery.<br><em>Under One Roof.</em></h2>
+        <p class="subtitle">Inventory management, pick-and-pack, packaging, labeling, and direct shipment to your locations. Manufacturing and fulfillment in the same facility. No transfer delays.</p>
+
+        <div class="bento">
+          <article class="bento-card"><div class="card-tag">Inventory</div><h3>Inventory Management &amp; Visibility</h3><p>Real-time inventory tracking, forecast-based production planning, and blanket PO support. Proactive scheduling, not reactive ordering.</p></article>
+          <article class="bento-card"><div class="card-tag">Fulfillment</div><h3>Pick, Pack &amp; Ship</h3><p>Finished goods move directly from QC to packaging and shipping. No facility transfers.</p></article>
+          <article class="bento-card"><div class="card-tag">Shipping</div><h3>Flexible Ship Cadence</h3><p>Support for scheduled shipments, on-demand releases, and multi-location distribution. Freight treatment configurable per program requirements.</p></article>
+          <div class="bento-img"><img src="/images/envision-feature.jpg" alt="Warehouse fulfillment"><div class="bento-img-overlay"><h3>Integrated Fulfillment</h3><p>Same facility. Zero transfer delays.</p></div></div>
+          <article class="bento-card wide"><div class="card-tag">Scale</div><h3>Volume-Ready Infrastructure</h3><p>From initial pilot volumes through sustained annual production across multiple SKUs. Production capacity and workforce scale with demand. No ceiling on growth within existing facilities.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="content">
+        <div class="eyebrow">Partnership Model</div>
+        <h2>A Domestic Accessory Partner.<br><em>Not a One-Off Supplier.</em></h2>
+        <p class="subtitle">A formal teaming agreement — Envision as Streamlight's long-term domestic manufacturing partner.</p>
+
+        <div class="partnership-grid">
+          <article class="partner-card"><div class="card-tag">Framework</div><h3>Teaming Agreement</h3><p>A defined commercial framework with pricing, IP protections, capacity commitments, and governance locked from day one.</p></article>
+          <article class="partner-card"><div class="card-tag">Execution</div><h3>Production &amp; Expansion</h3><p>Launch with the highest-readiness category, move directly into sustained production, then add categories onto the same architecture.</p></article>
+          <article class="partner-card highlight"><div class="card-tag">Long-Term Vision</div><h3>Broader Domestic Accessory Platform</h3><p>Streamlight's ecosystem extends well beyond these three categories — helmet mounts, rail mounts, replacement parts, and kits across product families. One domestic source that scales with your portfolio, no retooling required.</p></article>
+        </div>
+
+        <details class="disclosure">
+          <summary>What This Partnership Unlocks</summary>
+          <div class="disclosure-content">
+            <div class="value-tease" style="margin-top:0;">
+              <h3 class="tease-header">What This Partnership <span class="unlock-word">Unlocks</span></h3>
+              <div class="tease-grid">
+                <div class="tease-item"><h4>Texas State Use Program</h4><p>Dallas opens a pathway into Texas State Use procurement for qualifying lines.</p></div>
+                <div class="tease-item"><h4>Mandatory Procurement Item</h4><p>Longer-term opportunity for a joint position on a mandatory procurement item.</p></div>
+                <div class="tease-item"><h4>Shelf-Ready Kitting</h4><p>Lights, sewn goods, hardware, and packaging consolidated into shelf-ready kits.</p></div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="panel closing">
+      <div class="closing-bg"><img src="/images/envision-floor.jpg" alt=""></div>
+      <div class="overlay"></div>
+      <div class="content">
+        <img src="/images/envision-logo-white.png" alt="Envision" style="height: 48px;">
+        <div class="eyebrow" style="margin-top: 2rem;">Next Steps</div>
+        <h2>Ready to <em>Move Forward.</em></h2>
+        <p class="subtitle" style="margin-bottom: 1.5rem;">Ready to receive samples, start engineering review, and deliver prototypes on an accelerated timeline. Next step: confirm the launch SKU, lock the quote basis, and define the commercial framework.</p>
+
+        <div class="image-strip" style="margin-bottom:1rem;">
+          <img src="/images/production-inspection.jpg" alt="Production inspection">
+          <img src="/images/production-press.jpg" alt="Production press operations">
+          <img src="/images/production-templates.jpg" alt="Template and tooling work">
+        </div>
+
+        <div class="contact-cards">
+          <div class="contact-card"><div class="contact-role">Envision Contact</div><div class="contact-name">Kathy Vines</div><div class="contact-title">Vice President ‑ Strategic Partnerships &amp; Customer Care</div><div class="contact-info">kathy.vines@envisionus.com</div></div>
+          <div class="contact-card"><div class="contact-role">Envision Contact</div><div class="contact-name">Steven Amigh</div><div class="contact-title">Product and Project Manager</div><div class="contact-info">steven.amigh@envisionus.com</div></div>
+          <div class="contact-card"><div class="contact-role">Envision Contact</div><div class="contact-name">Patrick Tuttle</div><div class="contact-title">Senior Vice President, Operations and New Product Development</div><div class="contact-info">patrick.tuttle@envisionus.com</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
